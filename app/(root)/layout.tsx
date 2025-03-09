@@ -132,7 +132,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       const res = await axios.patch(`/api/notification/${notificationId}`);
 
       if (res.status === 201) {
-        await mutate("/api/notification");
+        // await mutate("/api/notification");
       }
     } catch (error) {}
   };
