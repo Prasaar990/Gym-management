@@ -50,7 +50,7 @@ model User {
   email          String   @unique
   hashedPassword String
   image          String?
-  role           Role
+  role           Role     @default(user)
   isActive       Boolean? @default(false)
   gender         Gender
   age            Int?     @default(18)
