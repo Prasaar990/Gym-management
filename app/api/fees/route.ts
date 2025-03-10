@@ -4,7 +4,7 @@
 
 // import prisma from "@/app/libs/prismadb";
 // import Error from "next/error";
-// import {Fees} from "@prisma/client";
+// import { Fees } from "@prisma/client";
 
 // export async function POST(req: Request) {
 //   try {
@@ -107,11 +107,11 @@
 
 //     fees.forEach((fee: Fees) => {
 //       if (fee.isPaid && fee.transactionId) {
-//         income += fee.amount
+//         income += fee.amount;
 //       } else {
-//         unpaid += fee.amount
+//         unpaid += fee.amount;
 //       }
-//     })
+//     });
 
 //     if (!fees || fees.length === 0) {
 //       return NextResponse.json(
@@ -128,7 +128,7 @@
 //       {
 //         fees,
 //         income,
-//         unpaid
+//         unpaid,
 //       },
 //       {
 //         status: 200,
