@@ -48,7 +48,7 @@ export const config = {
     "/notifications",
     "/students/:path*",
     "/trainers/:path*",
-    "/fees",
+    // "/fees",
     "/exercise/:path*",
     "/diet/:path*",
     "/user/:path*",
