@@ -47,7 +47,7 @@
 //       submit_type: "pay",
 //       mode: "payment",
 //       success_url: `${redirectURL}/user/fees/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-//       cancel_url: `${redirectURL}/user/fees?canceled=true`,
+//       cancel_url: `${redirectURL}/user/?canceled=true`,
 //       customer_email: email,
 //       client_reference_id: feeId,
 //       metadata: {
