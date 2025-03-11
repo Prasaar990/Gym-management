@@ -29,7 +29,7 @@ const fetcher = async (...args: Parameters<typeof axios>) => {
 };
 
 const AdminTrainerDashboard = ({ user }: { user: User }) => {
-  //   const { data: fees, isLoading: feesLoading } = useSWR("/api/fees", fetcher);
+  const { data: fees, isLoading: feesLoading } = useSWR("/api/fees", fetcher);
   const {
     data: users,
     isLoading: usersLoading,
@@ -44,8 +44,7 @@ const AdminTrainerDashboard = ({ user }: { user: User }) => {
 
   const router = useRouter();
 
-  //   if (feesLoading || usersLoading || attendancesLoading) {
-  if (usersLoading || attendancesLoading) {
+  if (feesLoading || usersLoading || attendancesLoading) {
     return <Loader />;
   }
 
@@ -81,21 +80,21 @@ const AdminTrainerDashboard = ({ user }: { user: User }) => {
         {user.role === "admin" && (
           <>
             <Grid item xs={12} sm={6} md={3}>
-              {/* <AppWidgetSummary
+              <AppWidgetSummary
                 title="Income"
-                // total={"$" + fees.income ? fees.income : 0}
+                total={"$" + fees.income ? fees.income : 0}
                 color={"primary"}
                 icon={<AttachMoneyIcon />}
-              /> */}
+              />
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
-              {/* <AppWidgetSummary
+              <AppWidgetSummary
                 title="Unpaid"
-                // total={"$" + fees.unpaid ? fees.unpaid : 0}
+                total={"$" + fees.unpaid ? fees.unpaid : 0}
                 color="warning"
                 icon={<AttachMoneyIcon />}
-              /> */}
+              />
             </Grid>
           </>
         )}

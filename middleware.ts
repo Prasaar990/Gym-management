@@ -7,7 +7,7 @@ export default withAuth(
       request.nextauth.token?.role === "user" &&
       (request.nextUrl.pathname.startsWith("/exercise") ||
         request.nextUrl.pathname.startsWith("/diet") ||
-        // request.nextUrl.pathname.startsWith("/fees") ||
+        request.nextUrl.pathname.startsWith("/fees") ||
         request.nextUrl.pathname.startsWith("/add-user") ||
         request.nextUrl.pathname.startsWith("/students"));
 

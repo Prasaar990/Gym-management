@@ -128,14 +128,14 @@ export default function ListItems() {
       )}
       {(user?.role === "admin" || user?.role === "trainer") && (
         <>
-          {/* <Link href="/fees" passHref>
-                        <ListItemButton title="Fees">
-                            <ListItemIcon>
-                                <MonetizationOnIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary="Fees"/>
-                        </ListItemButton>
-                    </Link> */}
+          <Link href="/fees" passHref>
+            <ListItemButton title="Fees">
+              <ListItemIcon>
+                <MonetizationOnIcon />
+              </ListItemIcon>
+              <ListItemText primary="Fees" />
+            </ListItemButton>
+          </Link>
 
           <Link href="/exercise" passHref>
             <ListItemButton title="Exercise">
@@ -166,14 +166,14 @@ export default function ListItems() {
               <ListItemText primary="My Attendance" />
             </ListItemButton>
           </Link>
-          {/* <Link href="/user/fees" passHref>
-                        <ListItemButton title="My Fees">
-                            <ListItemIcon>
-                                <MonetizationOnIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary="My Fees"/>
-                        </ListItemButton>
-                    </Link> */}
+          <Link href="/user/fees" passHref>
+            <ListItemButton title="My Fees">
+              <ListItemIcon>
+                <MonetizationOnIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Fees" />
+            </ListItemButton>
+          </Link>
           <Link href="/user/exercise" passHref>
             <ListItemButton title="My Exercise">
               <ListItemIcon>

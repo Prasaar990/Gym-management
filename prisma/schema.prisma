@@ -1,6 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -50,7 +51,7 @@ model User {
   email          String   @unique
   hashedPassword String
   image          String?
-  role           Role     @default(user)
+  role           Role     @default(user)  
   isActive       Boolean? @default(false)
   gender         Gender
   age            Int?     @default(18)
@@ -134,19 +135,19 @@ enum Month {
   December
 }
 
-// model Fees {
-//   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-//   email         String
-//   month         Month
-//   year          String
-//   message       String
-//   amount        Int
-//   isPaid        Boolean   @default(false)
-//   transactionId String?
-//   paymentDate   DateTime?
-//   createdAt     DateTime  @default(now())
-//   updatedAt     DateTime  @updatedAt
-// }
+model Fees {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String
+  month         Month
+  year          String
+  message       String
+  amount        Int
+  isPaid        Boolean   @default(false)
+  transactionId String?
+  paymentDate   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
 
 // exercise 
 
@@ -184,7 +185,7 @@ model WorkOut {
 enum NotificationType {
   diet
   exercise
-  // fees
+  fees
   payment
   reminder
   message

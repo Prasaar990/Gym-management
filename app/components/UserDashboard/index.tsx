@@ -25,15 +25,17 @@ const fetcher = async (...args: Parameters<typeof axios>) => {
   return res.data;
 };
 const UserDashboard = ({ user }: { user: User }) => {
-  // const {data: fees, isLoading: feesLoading} = useSWR("/api/user/fees", fetcher)
+  const { data: fees, isLoading: feesLoading } = useSWR(
+    "/api/user/fees",
+    fetcher
+  );
   const { data: attendances, isLoading: attendanceLoading } = useSWR(
     "/api/user/attendance",
     fetcher
   );
   const router = useRouter();
 
-  // if (feesLoading || attendanceLoading) {
-  if (attendanceLoading) {
+  if (feesLoading || attendanceLoading) {
     return <Loader />;
   }
 
