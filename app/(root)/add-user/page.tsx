@@ -170,7 +170,8 @@ const AddMemberPage: React.FC = () => {
                     message: "Password must have at most 20 characters",
                   },
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/,
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
                     message:
                       "Password must contain at least one uppercase letter, one lowercase letter and one number",
                   },

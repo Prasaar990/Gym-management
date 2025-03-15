@@ -5,7 +5,8 @@ import axios from "axios";
 import { User } from "@prisma/client";
 import { handleActiveStatus } from "@/utils";
 import Loader from "@/app/components/Loader/Loader";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+// import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import AppWidgetSummary from "@/app/components/AppWidgetSummary/AppWidgetSummary";
 import AttendanceGraph from "@/app/components/AdminTrainerDashboard/AttendancesGraph";
 import {
@@ -67,21 +68,21 @@ const UserDashboard = ({ user }: { user: User }) => {
 
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={3}>
-          {/* <AppWidgetSummary
+          <AppWidgetSummary
             title="Paid"
-            total={"$" + fees?.paid ? fees?.paid : 0}
+            total={"&#8377;" + fees?.paid ? fees?.paid : 0}
             color={"primary"}
-            icon={<AttachMoneyIcon />}
-          /> */}
+            icon={<CurrencyRupeeIcon />}
+          />
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          {/* <AppWidgetSummary
+          <AppWidgetSummary
             title="Unpaid"
-            total={"$" + fees?.unpaid ? fees?.unpaid : 0}
+            total={"&#8377;" + fees?.unpaid ? fees?.unpaid : 0}
             color="warning"
-            icon={<AttachMoneyIcon />}
-          /> */}
+            icon={<CurrencyRupeeIcon />}
+          />
         </Grid>
       </Grid>
 

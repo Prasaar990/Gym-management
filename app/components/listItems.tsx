@@ -12,7 +12,8 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import NoMealsIcon from "@mui/icons-material/NoMeals";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import EventNoteIcon from "@mui/icons-material/EventNote";
+// import EventNoteIcon from "@mui/icons-material/EventNote";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 
 import Link from "next/link";
 import Divider from "@mui/material/Divider";
@@ -69,11 +70,11 @@ export default function ListItems() {
       {(user?.role === "admin" || user?.role === "trainer") && (
         <>
           <Link href="/students" passHref>
-            <ListItemButton title="Students">
+            <ListItemButton title="Members">
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
-              <ListItemText primary="Students" />
+              <ListItemText primary="Members" />
             </ListItemButton>
           </Link>
           <Link href="/attendance" passHref>
@@ -131,7 +132,7 @@ export default function ListItems() {
           <Link href="/fees" passHref>
             <ListItemButton title="Fees">
               <ListItemIcon>
-                <MonetizationOnIcon />
+                <CurrencyRupeeIcon />
               </ListItemIcon>
               <ListItemText primary="Fees" />
             </ListItemButton>

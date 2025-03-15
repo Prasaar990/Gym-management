@@ -8,7 +8,8 @@ import { handleActiveStatus } from "@/utils";
 import MenuItem from "@mui/material/MenuItem";
 import PeopleIcon from "@mui/icons-material/People";
 import Loader from "@/app/components/Loader/Loader";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+// import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import TodayGraph from "@/app/components/AdminTrainerDashboard/TodayGraph";
 import AppWidgetSummary from "@/app/components/AppWidgetSummary/AppWidgetSummary";
 import {
@@ -82,18 +83,18 @@ const AdminTrainerDashboard = ({ user }: { user: User }) => {
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Income"
-                total={"$" + fees.income ? fees.income : 0}
+                total={"$" + fees?.income ? fees?.income : 0}
                 color={"primary"}
-                icon={<AttachMoneyIcon />}
+                icon={<CurrencyRupeeIcon />}
               />
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Unpaid"
-                total={"$" + fees.unpaid ? fees.unpaid : 0}
+                total={"₹" + (fees.unpaid ? fees.unpaid : 0)}
                 color="warning"
-                icon={<AttachMoneyIcon />}
+                icon={<CurrencyRupeeIcon />}
               />
             </Grid>
           </>
@@ -110,7 +111,7 @@ const AdminTrainerDashboard = ({ user }: { user: User }) => {
 
         <Grid item xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Students"
+            title="Members"
             total={`${users.students ? users?.students : 0}`}
             color="warning"
             icon={<PeopleIcon />}
