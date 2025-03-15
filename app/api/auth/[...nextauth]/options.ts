@@ -63,25 +63,27 @@ export const options: NextAuthOptions = {
       };
     },
     jwt: ({ token, user, trigger, session }) => {
+      const { picture, ...temp } = token;
+
       if (user) {
         const u = user as unknown as User;
+        console.log("inside user");
         return {
-          ...token,
+          ...temp,
           id: u.id,
           role: u.role,
         };
       }
 
       if (trigger === "update") {
-        // console.log("----------------------->>>>>inside trigger");
+        console.log("trigger");
         return {
-          ...token,
+          ...temp,
           ...session?.user,
-          picture: session.user.image,
         };
       }
 
-      return token;
+      return temp;
     },
   },
   pages: {
