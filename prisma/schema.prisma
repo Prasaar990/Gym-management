@@ -44,16 +44,42 @@ enum Level {
 }
 
 // User
-
 model User {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   name           String
-  email          String   @unique
+  surname        String
+  fatherHusbandName String
   hashedPassword String
+  email          String   @unique
   image          String?
   role           Role     @default(user)  
   isActive       Boolean? @default(false)
   gender         Gender
+  dateOfBirth    DateTime?
+  bloodGroup     String?
+  maritalStatus  String?
+  anniversaryDate DateTime?
+  residentialAddress String?
+  // flatNo         String?
+  // wing           String?
+  // floor          String?
+  // buildingName   String?
+  // area           String?
+  // street         String?
+  // landmark       String?
+  // pinCode        String?
+  businessName   String?
+  officeAddress  String?
+  // officeNo       String?
+  // officeFloor    String?
+  // officeBuildingName String?
+  // officeArea     String?
+  // officeStreet   String?
+  // officeLandmark String?
+  // officePinCode  String?
+  // telephone      String?
+  mobile         String?
+
   age            Int?     @default(18)
   height         Int?     @default(100)
   weight         Int?     @default(50)
@@ -78,6 +104,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 
 model PasswordResetToken {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId

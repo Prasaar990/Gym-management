@@ -8,7 +8,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+// import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import NoMealsIcon from "@mui/icons-material/NoMeals";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -170,7 +170,7 @@ export default function ListItems() {
           <Link href="/user/fees" passHref>
             <ListItemButton title="My Fees">
               <ListItemIcon>
-                <MonetizationOnIcon />
+                <CurrencyRupeeIcon />
               </ListItemIcon>
               <ListItemText primary="My Fees" />
             </ListItemButton>

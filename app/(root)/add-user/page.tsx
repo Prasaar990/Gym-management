@@ -21,6 +21,7 @@ const AddMemberPage: React.FC = () => {
   const { data } = useSession();
   const sessionUser = data?.user as SessionUser;
   const router = useRouter();
+
   const {
     register,
     watch,
@@ -28,12 +29,24 @@ const AddMemberPage: React.FC = () => {
     reset,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FieldValues & { age: number; weight: number; height: number }>({
+  } = useForm<
+    FieldValues & {
+      age: number;
+      weight: number;
+      height: number;
+    }
+  >({
     defaultValues: {
-      role: "",
       name: "",
+      surname: "",
+      fatherHusbandName: "",
       email: "",
       password: "",
+      confirmPassword: "",
+      residentialAddress: "",
+      businessName: "",
+      officeAddress: "",
+      role: "",
       image: "",
       age: 18,
       weight: 50,
@@ -41,12 +54,18 @@ const AddMemberPage: React.FC = () => {
       gender: "",
       goal: "",
       level: "",
+      mobile: "",
+      dateOfBirth: "",
+      bloodGroup: "",
+      maritalStatus: "",
+      anniversaryDate: "",
     },
   });
 
   const image = watch("image");
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
     try {
       const res = await axios.post("/api/users", data, {
         headers: {
@@ -82,6 +101,7 @@ const AddMemberPage: React.FC = () => {
               mt: 3,
             }}
           >
+            {/* Name */}
             <Grid item xs={12} sm={6}>
               <TextField
                 type="text"
@@ -100,11 +120,101 @@ const AddMemberPage: React.FC = () => {
                 error={!!errors?.name?.message}
               />
             </Grid>
+
+            {/* Surname */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                autoComplete="surname"
+                required
+                fullWidth
+                id="surname"
+                label="Surname"
+                autoFocus
+                {...register("surname", { required: true })}
+                helperText={
+                  errors.surname && typeof errors.surname.message === "string"
+                    ? errors.surname.message
+                    : null
+                }
+                error={!!errors?.surname?.message}
+              />
+            </Grid>
+
+            {/* Father/Husband's name */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                autoComplete="fatherHusbandName"
+                required
+                fullWidth
+                id="fatherHusbandName"
+                label="Father's/Husband's Name"
+                autoFocus
+                {...register("fatherHusbandName", { required: true })}
+                helperText={
+                  errors.fatherHusbandName &&
+                  typeof errors.fatherHusbandName.message === "string"
+                    ? errors.fatherHusbandName.message
+                    : null
+                }
+                error={!!errors?.fatherHusbandName?.message}
+              />
+            </Grid>
+
+            {/* Residential Address */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                autoComplete="residentialAddress"
+                required
+                fullWidth
+                id="residentialAddress"
+                label="Residential Address"
+                autoFocus
+                {...register("residentialAddress", { required: true })}
+                helperText={
+                  errors.residentialAddress &&
+                  typeof errors.residentialAddress.message === "string"
+                    ? errors.residentialAddress.message
+                    : null
+                }
+                error={!!errors?.residentialAddress?.message}
+              />
+            </Grid>
+
+            {/* Blood Group */}
+            <Grid item xs={12} sm={6}>
+              <Select
+                id="bloodGroup"
+                defaultValue={"A+"}
+                {...register("bloodGroup", {
+                  required: "This field is required",
+                  validate: (value) =>
+                    ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"].includes(
+                      value
+                    ) || "Invalid blood group",
+                })}
+                required
+              >
+                {/* <MenuItem value="">Select Blood Group</MenuItem> */}
+                <MenuItem value="A+">A+</MenuItem>
+                <MenuItem value="A-">A-</MenuItem>
+                <MenuItem value="B+">B+</MenuItem>
+                <MenuItem value="B-">B-</MenuItem>
+                <MenuItem value="O+">O+</MenuItem>
+                <MenuItem value="O-">O-</MenuItem>
+                <MenuItem value="AB+">AB+</MenuItem>
+                <MenuItem value="AB-">AB-</MenuItem>
+              </Select>
+            </Grid>
+
             <Grid item xs={12} sm={6}>
               <Select
                 fullWidth
                 autoFocus
                 required
+                id="role"
                 defaultValue={"user"}
                 {...register("role", {
                   required: true,
@@ -114,9 +224,10 @@ const AddMemberPage: React.FC = () => {
                 {sessionUser?.role === "admin" && (
                   <MenuItem value="trainer">Trainer</MenuItem>
                 )}
-                <MenuItem value="user">Student</MenuItem>
+                <MenuItem value="user">Member</MenuItem>
               </Select>
             </Grid>
+
             <Grid item xs={12}>
               <ImageUpload setValue={setValue} value={image} />
             </Grid>
@@ -145,6 +256,50 @@ const AddMemberPage: React.FC = () => {
                 })}
               />
             </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="number"
+                required
+                fullWidth
+                id="mobile"
+                label="Mobile number"
+                autoFocus
+                error={!!errors?.mobile?.message}
+                helperText={
+                  errors.mobile && typeof errors.mobile.message === "string"
+                    ? errors.mobile.message
+                    : null
+                }
+                {...register("mobile", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]{10}$/,
+                    message: "Invalid mobile number",
+                  },
+                })}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Select
+                id="gender"
+                fullWidth
+                autoFocus
+                required
+                defaultValue={"male"}
+                {...register("gender", {
+                  required: true,
+                })}
+                displayEmpty
+              >
+                {sessionUser?.role === "admin" && (
+                  <MenuItem value="male">Male</MenuItem>
+                )}
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+            </Grid>
+
             <Grid item xs={12} sm={6}>
               <TextField
                 type="password"
@@ -179,16 +334,17 @@ const AddMemberPage: React.FC = () => {
               />
             </Grid>
 
+            {/* Age */}
             <Grid item xs={12} sm={6}>
               <TextField
                 type="number"
                 autoComplete="age"
+                autoFocus
                 required
                 fullWidth
                 min={0}
                 id="age"
                 label="Age"
-                autoFocus
                 {...register("age", {
                   required: true,
                   min: {
@@ -209,6 +365,72 @@ const AddMemberPage: React.FC = () => {
                 error={!!errors?.age?.message}
               />
             </Grid>
+
+            {/* Birth day */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="date"
+                autoComplete="dateOfBirth"
+                required
+                fullWidth
+                min={0}
+                id="dateOfBirth"
+                label="DOB"
+                autoFocus
+                // placeholder=""
+                InputLabelProps={{ shrink: true }}
+                {...register("dateOfBirth", {
+                  required: true,
+                  validate: (value) => {
+                    const enteredDate = new Date(value);
+                    const today = new Date();
+                    if (enteredDate >= today) {
+                      return "Date of Birth must be in the past";
+                    }
+                    return true;
+                  },
+                })}
+                helperText={
+                  errors.age && typeof errors.age.message === "string"
+                    ? errors.age.message
+                    : null
+                }
+                error={!!errors?.age?.message}
+              />
+            </Grid>
+
+            {/* Anniversary date */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="date"
+                autoComplete="date"
+                fullWidth
+                min={0}
+                id="anniversaryDate"
+                label="Anniversary Date"
+                InputLabelProps={{ shrink: true }}
+                autoFocus
+                {...register("anniversaryDate", {
+                  validate: (value) => {
+                    const enteredDate = new Date(value);
+                    const today = new Date();
+                    if (enteredDate >= today) {
+                      return "Anniversary date must be in the past";
+                    }
+                    return true;
+                  },
+                })}
+                helperText={
+                  errors.anniversaryDate &&
+                  typeof errors.anniversaryDate.message === "string"
+                    ? errors.anniversaryDate.message
+                    : null
+                }
+                error={!!errors?.anniversaryDate?.message}
+              />
+            </Grid>
+
+            {/* Weight */}
             <Grid item xs={12} sm={6}>
               <TextField
                 type="number"
@@ -238,6 +460,8 @@ const AddMemberPage: React.FC = () => {
                 error={!!errors?.weight?.message}
               />
             </Grid>
+
+            {/* HEIGHT */}
             <Grid item xs={12} sm={6}>
               <TextField
                 type="number"
@@ -268,21 +492,25 @@ const AddMemberPage: React.FC = () => {
                 error={!!errors?.height?.message}
               />
             </Grid>
+
+            {/* Marital Status: */}
             <Grid item xs={12} sm={6}>
               <Select
                 fullWidth
                 autoFocus
                 required
-                defaultValue={"male"}
-                {...register("gender", {
+                id="maritalStatus"
+                defaultValue={"single"}
+                {...register("maritalStatus", {
                   required: true,
                 })}
                 displayEmpty
               >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
+                <MenuItem value="single">Single</MenuItem>
+                <MenuItem value="married">Married</MenuItem>
               </Select>
             </Grid>
+
             <Grid item xs={12} sm={6}>
               <Select
                 fullWidth
@@ -304,12 +532,56 @@ const AddMemberPage: React.FC = () => {
                 <MenuItem value="learn_the_basics">Learn The Basics</MenuItem>
               </Select>
             </Grid>
+
+            {/* Name and Nature of Business */}
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                autoComplete="businessName"
+                required
+                fullWidth
+                id="businessName"
+                label="Name & Nature Of Business"
+                autoFocus
+                {...register("businessName", { required: true })}
+                helperText={
+                  errors.businessName &&
+                  typeof errors.businessName.message === "string"
+                    ? errors.businessName.message
+                    : null
+                }
+                error={!!errors?.businessName?.message}
+              />
+            </Grid>
+
+            {/* office address */}
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                autoComplete="officeAddress"
+                required
+                fullWidth
+                id="officeAddress"
+                label="Office Address"
+                autoFocus
+                {...register("officeAddress", { required: true })}
+                helperText={
+                  errors.officeAddress &&
+                  typeof errors.officeAddress.message === "string"
+                    ? errors.officeAddress.message
+                    : null
+                }
+                error={!!errors?.officeAddress?.message}
+              />
+            </Grid>
+
             <Grid item xs={12}>
               <Select
                 fullWidth
                 autoFocus
                 required
                 defaultValue={"beginner"}
+                id="level"
                 {...register("level", {
                   required: true,
                 })}

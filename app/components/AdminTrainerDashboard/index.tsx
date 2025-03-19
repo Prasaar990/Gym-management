@@ -83,7 +83,7 @@ const AdminTrainerDashboard = ({ user }: { user: User }) => {
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
                 title="Income"
-                total={"$" + fees?.income ? fees?.income : 0}
+                total={"₹" + fees?.income ? fees?.income : 0}
                 color={"primary"}
                 icon={<CurrencyRupeeIcon />}
               />

@@ -173,7 +173,7 @@ export default function SignInPage() {
         >
           <p>Don&apos;t have account?</p>
           <Button
-            onClick={() => (window.location.href = "/signup")}
+            onClick={() => router.push("/signup")}
             size="small"
             variant="contained"
           >
