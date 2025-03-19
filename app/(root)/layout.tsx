@@ -38,6 +38,7 @@ import {
 } from "@mui/material";
 import { handleActiveStatus } from "@/utils";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const drawerWidth: number = 240;
 
@@ -313,10 +314,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "space-between",
               px: [1],
             }}
           >
+            <Image src="/logo2.png" alt="logo img" width={80} height={10} />
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>

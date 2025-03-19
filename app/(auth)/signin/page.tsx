@@ -5,9 +5,10 @@ import toast from "react-hot-toast";
 import Loader from "@/app/components/Loader/Loader";
 import { useSession, signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import Image from "next/image";
 import {
   Grid,
   Link,
@@ -78,6 +79,32 @@ export default function SignInPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Container
+        sx={{
+          width: { sm: "75%", lg: "40%" },
+          height: "100vh",
+          backgroundColor: ["white", null, null, "#f2a23e"],
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          gap: "2rem",
+          padding: "0",
+          margin: "auto 0",
+        }}
+      >
+        <Typography variant="body1" sx={{ marginRight: 1, fontSize: "1.8rem" }}>
+          Don&apos;t have an account?
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => router.push("/signup")}
+        >
+          SIGN UP
+        </Button>
+      </Container>
       <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Box
@@ -88,11 +115,20 @@ export default function SignInPage() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, backgroundColor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar
+            sx={{ m: 1, width: "150px", height: "80px", borderRadius: "0" }}
+            className="rounded-none"
+          >
+            <Image
+              src="/logo.webp"
+              alt="Gym Logo"
+              width={150}
+              height={80}
+              priority
+            />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign In To SmartFlex
           </Typography>
           <Box
             component="form"
@@ -157,12 +193,11 @@ export default function SignInPage() {
           </Box>
         </Box>
 
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
-            // backgroundColor: "red",
             paddingX: "3rem",
             flexDirection: {
               xs: "column",
@@ -179,43 +214,7 @@ export default function SignInPage() {
           >
             Signup
           </Button>
-          {/* <Button
-            onClick={() => {
-              setTestUser({
-                email: "rjabid36@gmail.com",
-                password: "123456Abid",
-              });
-            }}
-            size={"small"}
-            variant="contained"
-          >
-            Role as Admin
-          </Button>
-          <Button
-            onClick={() => {
-              setTestUser({
-                email: "test1@gmail.com",
-                password: "123456Abid",
-              });
-            }}
-            size={"small"}
-            variant="contained"
-          >
-            Role as Trainer
-          </Button>
-          <Button
-            onClick={() => {
-              setTestUser({
-                email: "test2@gmail.com",
-                password: "123456Abid",
-              });
-            }}
-            size={"small"}
-            variant="contained"
-          >
-            Role as User
-          </Button> */}
-        </Box>
+        </Box> */}
       </Container>
     </ThemeProvider>
   );

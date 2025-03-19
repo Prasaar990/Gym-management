@@ -52,8 +52,10 @@ const MONTHS = [
   { id: 11, name: "November" },
   { id: 12, name: "December" },
 ];
-// 2021 - 2099
-const YEARS = Array.from({ length: 79 }, (_, i) => i + 2021);
+
+const current_year = new Date().getFullYear();
+
+const YEARS = Array.from({ length: 10 }, (_, i) => i + current_year);
 const YEAR_OBJECTS = YEARS.map((year, index) => ({
   id: index + 1,
   name: year,
@@ -396,6 +398,15 @@ const FeesPage: React.FC = () => {
                         Year
                       </TableSortLabel>
                     </TableCell>
+                    <TableCell>
+                      <TableSortLabel
+                        active={orderBy === "amount"}
+                        direction={order}
+                        onClick={handleSortChange("amount")}
+                      >
+                        Amount
+                      </TableSortLabel>
+                    </TableCell>
                     <TableCell>Status</TableCell>
                     <TableCell>Reminder</TableCell>
                   </TableRow>
@@ -407,6 +418,7 @@ const FeesPage: React.FC = () => {
                       <TableCell>{fee?.email}</TableCell>
                       <TableCell>{fee?.month}</TableCell>
                       <TableCell>{fee?.year}</TableCell>
+                      <TableCell>{fee?.amount}</TableCell>
                       <TableCell>
                         {fee?.isPaid && fee.transactionId ? (
                           <Chip

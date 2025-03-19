@@ -259,7 +259,7 @@ const AssignExercisePage: React.FC = () => {
             <Grid item xs={12}>
               <FormControl fullWidth>
                 <InputLabel id="demo-multiple-checkbox-label">
-                  Students
+                  Members
                 </InputLabel>
                 <Select
                   labelId="demo-multiple-checkbox-label"

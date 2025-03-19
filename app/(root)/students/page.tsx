@@ -73,7 +73,7 @@ const StudentsPage: React.FC = () => {
 
   return (
     <>
-      <Typography variant="h2">Students</Typography>
+      <Typography variant="h2">Members</Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
