@@ -82,7 +82,7 @@ export default function SignInPage() {
       <Container
         sx={{
           width: { sm: "75%", lg: "40%" },
-          height: "100vh",
+          height: { sm: "100%", lg: "100vh" },
           backgroundColor: ["white", null, null, "#f2a23e"],
           display: "flex",
           flexDirection: "column",

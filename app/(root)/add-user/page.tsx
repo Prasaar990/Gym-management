@@ -65,7 +65,6 @@ const AddMemberPage: React.FC = () => {
   const image = watch("image");
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     try {
       const res = await axios.post("/api/users", data, {
         headers: {
@@ -87,7 +86,6 @@ const AddMemberPage: React.FC = () => {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-
         <Box
           component="form"
           noValidate

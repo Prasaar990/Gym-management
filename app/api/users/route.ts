@@ -86,6 +86,8 @@ export async function GET(request: NextApiRequest) {
     last: pages,
   };
 
+  // console.log(users);
+
   return NextResponse.json({
     status: 200,
     data: users,

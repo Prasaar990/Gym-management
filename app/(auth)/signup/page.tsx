@@ -1,12 +1,13 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+// import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import Loader from "@/app/components/Loader/Loader";
+import ImageUpload from "@/app/components/ImageUpload";
 
 export default function SignUpPage() {
   const { status } = useSession();
@@ -15,6 +16,7 @@ export default function SignUpPage() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -52,11 +54,12 @@ export default function SignUpPage() {
       image: "",
     },
   });
+  const image = watch("image");
 
   const [imageBase64, setImageBase64] = useState<string>("");
 
   const handleSignUp: SubmitHandler<FieldValues> = async (data) => {
-    data.image = imageBase64;
+    // data.image = imageBase64;
     const res = await axios.post("/api/auth/register", data);
     if (res.status === 200) {
       return router.push("/signin");
@@ -65,6 +68,7 @@ export default function SignUpPage() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -97,7 +101,12 @@ export default function SignUpPage() {
         2. Members are required to personally fill all the details.
         <br />
       </p>
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit(handleSignUp)}>
+      <form
+        className="mt-8 space-y-6"
+        onSubmit={handleSubmit((data) => {
+          handleSignUp(data);
+        })}
+      >
         {/* <div>
           <label
             htmlFor="membershipId"
@@ -417,8 +426,8 @@ export default function SignUpPage() {
         </div>
 
         {/* Marital status */}
-        <div className="flex items-center justify-start gap-5 w-full ">
-          <label className="block  text-sm font-medium text-gray-900 dark:text-white h-full p-2">
+        <div className="flex items-center justify-start gap-5 w-full">
+          <label className="block text-sm font-medium text-gray-900 dark:text-white h-full p-2">
             Marital Status:
           </label>
           <div className="flex items-center">
@@ -426,9 +435,8 @@ export default function SignUpPage() {
               id="married"
               type="radio"
               value="Married"
-              {...register("married", { required: true })}
+              {...register("maritalStatus", { required: true })}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-              required
             />
             <label
               htmlFor="married"
@@ -437,7 +445,7 @@ export default function SignUpPage() {
               Married
             </label>
           </div>
-          <div className="flex items-center ">
+          <div className="flex items-center">
             <input
               id="single"
               type="radio"
@@ -528,13 +536,15 @@ export default function SignUpPage() {
           >
             Upload your profile picture
           </label>
-          <input
+          {/* <input
             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             id="file_input"
             type="file"
             {...register("image", { required: true })}
             onChange={handleImageChange}
-          />
+          /> */}
+          <ImageUpload setValue={setValue} value={image} />
+
           {errors &&
             errors.image &&
             typeof errors.image.message === "string" && (

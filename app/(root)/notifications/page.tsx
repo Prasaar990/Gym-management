@@ -56,15 +56,11 @@ export default function NotificationsPage() {
     return <Empty title={"Error"} subtitle={"Something went wrong."} />;
   }
 
-  console.log(isLoading);
-
   const notifications = data?.data?.data;
 
   if (isLoading) {
-    console.log("inside loader", notifications.length);
     return <Loader />;
   }
-  console.log("outside loader");
   return (
     <Box>
       {notifications?.length > 0 ? (
